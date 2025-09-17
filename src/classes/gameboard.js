@@ -4,6 +4,7 @@ class Gameboard {
     this.board = this.createBoard();
     this.ships = [];
     this.misses = [];
+    this.attackedPositions = new Set();
   } 
 
   createBoard() {
@@ -15,22 +16,35 @@ class Gameboard {
     return board;
   }
 
-  placeShip(ship, start, end) {
-    const [startX, startY] = start;
-    const [endX, endY] = end;
-
-    if (startX === endX) {
-      // Vertical placement
-      for (let y = startY; y <= endY; y++) {
-        this.board[startX][y] = ship;
-      }
-    } else if (startY === endY) {
-      // Horizontal placement
-      for (let x = startX; x <= endX; x++) {
-        this.board[x][startY] = ship;
+  placeShip(ship, row, col, isHorizontal) {
+    const length = ship.length;
+    for (let i = 0; i < length; i++) {
+      if (isHorizontal) {
+        this.board[row][col + i] = ship;
+      } else {
+        this.board[row + i][col] = ship;
       }
     }
     this.ships.push(ship);
+    return true;
+  }
+
+  receiveAttack(row, col) {
+    const position = `${row},${col}`;
+
+    if (this.misses.includes(position)) {
+      return 'already attacked';
+    }
+
+    this.attackedPositions.add(position);
+    const ship = this.board[row][col];
+    if (ship) {
+      ship.hit();
+      return ship.sunk ? 'sunk' : 'hit';
+    } else {
+      this.misses.push(position);
+      return 'miss';
+    }
   }
 
 
