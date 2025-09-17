@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battleship Game</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <h1>Battleship</h1>
+    </header>
+    
+    <main id="game-container">
+        <!-- Setup Screen -->
+        <div id="setup-screen">
+            <h2>Place Your Ships</h2>
+            <div id="difficulty-selection">
+                <label for="difficulty">Difficulty:</label>
+                <select id="difficulty">
+                    <option value="normal">Normal</option>
+                    <option value="hard">Hard (Smart AI)</option>
+                </select>
+            </div>
+            
+            <!-- Ship Placement Interface -->
+            <div id="ship-placement-area">
+                <div id="placement-controls">
+                    <h3>Ships to Place:</h3>
+                    <div id="ships-list">
+                        <div class="ship-item" data-ship-index="0" data-length="5">
+                            <span>Carrier (5)</span>
+                            <button class="place-ship-btn">Place</button>
+                        </div>
+                        <div class="ship-item" data-ship-index="1" data-length="4">
+                            <span>Battleship (4)</span>
+                            <button class="place-ship-btn">Place</button>
+                        </div>
+                        <div class="ship-item" data-ship-index="2" data-length="3">
+                            <span>Cruiser (3)</span>
+                            <button class="place-ship-btn">Place</button>
+                        </div>
+                        <div class="ship-item" data-ship-index="3" data-length="3">
+                            <span>Submarine (3)</span>
+                            <button class="place-ship-btn">Place</button>
+                        </div>
+                        <div class="ship-item" data-ship-index="4" data-length="2">
+                            <span>Destroyer (2)</span>
+                            <button class="place-ship-btn">Place</button>
+                        </div>
+                    </div>
+                    
+                    <div id="placement-options">
+                        <label>
+                            <input type="radio" name="orientation" value="horizontal" checked>
+                            Horizontal
+                        </label>
+                        <label>
+                            <input type="radio" name="orientation" value="vertical">
+                            Vertical
+                        </label>
+                    </div>
+                </div>
+                
+                <div id="placement-board-container">
+                    <h3>Your Board</h3>
+                    <div id="placement-board" class="game-board"></div>
+                </div>
+            </div>
+            
+            <div id="ship-placement-controls">
+                <button id="random-placement">Random Placement</button>
+                <button id="clear-ships">Clear All</button>
+                <button id="start-game" disabled>Start Game</button>
+            </div>
+        </div>
+        
+        <!-- Game Screen -->
+        <div id="game-screen" style="display: none;">
+            <div id="game-info">
+                <div id="current-player">Your Turn</div>
+                <div id="game-status">Click on the enemy board to attack!</div>
+                <div id="ships-remaining">
+                    <span id="player-ships">Your Ships: 5</span>
+                    <span id="enemy-ships">Enemy Ships: 5</span>
+                </div>
+            </div>
+            
+            <div id="game-boards">
+                <div class="board-container">
+                    <h3>Your Board</h3>
+                    <div id="player-board" class="game-board"></div>
+                </div>
+                
+                <div class="board-container">
+                    <h3>Enemy Board</h3>
+                    <div id="enemy-board" class="game-board"></div>
+                </div>
+            </div>
+            
+            <div id="game-controls">
+                <button id="surrender">Surrender</button>
+            </div>
+        </div>
+        
+        <!-- Game Over Screen -->
+        <div id="game-over-screen" style="display: none;">
+            <h2 id="winner-message"></h2>
+            <div id="game-stats">
+                <p id="total-turns"></p>
+                <p id="accuracy"></p>
+            </div>
+            <button id="new-game">New Game</button>
+        </div>
+        
+        <!-- Loading/Status Messages -->
+        <div id="message-overlay" style="display: none;">
+            <div id="message-content"></div>
+        </div>
+    </main>
+    
+    <!-- Include game classes as ES modules -->
+    <script type="module" src="index.js"></script>
+</body>
+</html>
