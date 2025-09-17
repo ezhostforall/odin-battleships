@@ -1,4 +1,4 @@
-const Ship = require('./ship');
+import Ship from './ship.js';
 
 it('should create a ship with a given length', () => {
   const ship = new Ship(5);

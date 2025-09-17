@@ -1,6 +1,6 @@
-const Player = require('./player');
-const Ship = require('./ship');
-const Gameboard = require('./gameboard');
+import Player from './player.js';
+import Ship from './ship.js';
+import Gameboard from './gameboard.js';
 
 it('should create a Player instance', () => {
   const player = new Player();

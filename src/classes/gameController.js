@@ -1,6 +1,6 @@
-const Player = require('./player');
-const Gameboard = require('./gameboard');
-const Ship = require('./ship');
+import Player from './player.js';
+import Gameboard from './gameboard.js';
+import Ship from './ship.js';
 
 class GameController {
   constructor() {
@@ -384,4 +384,4 @@ class GameController {
   }
 }
 
-module.exports = GameController;
+export default GameController;

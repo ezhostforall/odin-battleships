@@ -1,0 +1,369 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: linear-gradient(135deg, #1e3c72, #2a5298);
+    color: white;
+    min-height: 100vh;
+}
+
+header {
+    text-align: center;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.3);
+}
+
+header h1 {
+    font-size: 2.5rem;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+#game-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Setup Screen Styles */
+#setup-screen {
+    text-align: center;
+}
+
+#setup-screen h2 {
+    margin-bottom: 20px;
+    font-size: 2rem;
+}
+
+#difficulty-selection {
+    margin-bottom: 20px;
+}
+
+#difficulty-selection select {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+    border: none;
+    background: white;
+    color: #333;
+}
+
+#ship-placement-area {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 30px 0;
+}
+
+#placement-controls {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    min-width: 250px;
+}
+
+#ships-list {
+    margin: 20px 0;
+}
+
+.ship-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    margin: 5px 0;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 5px;
+}
+
+.ship-item.placed {
+    background: rgba(0, 255, 0, 0.2);
+}
+
+.ship-item.selected {
+    background: rgba(255, 255, 0, 0.3);
+    border: 2px solid yellow;
+}
+
+.place-ship-btn {
+    padding: 5px 10px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 3px;
+    cursor: pointer;
+}
+
+.place-ship-btn:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+#placement-options {
+    margin-top: 15px;
+}
+
+#placement-options label {
+    display: block;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+#ship-placement-controls {
+    margin-top: 20px;
+}
+
+#ship-placement-controls button {
+    margin: 0 10px;
+    padding: 12px 24px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    background: #4CAF50;
+    color: white;
+    transition: background 0.3s;
+}
+
+#ship-placement-controls button:hover:not(:disabled) {
+    background: #45a049;
+}
+
+#ship-placement-controls button:disabled {
+    background: #666;
+    cursor: not-allowed;
+}
+
+/* Game Board Styles */
+.game-board {
+    display: grid;
+    grid-template-columns: repeat(10, 40px);
+    grid-template-rows: repeat(10, 40px);
+    gap: 1px;
+    background: #333;
+    border: 2px solid #666;
+    padding: 5px;
+    margin: 0 auto;
+}
+
+.board-cell {
+    width: 40px;
+    height: 40px;
+    background: #4a90e2;
+    border: 1px solid #357abd;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    transition: all 0.2s;
+}
+
+.board-cell:hover {
+    background: #5ba0f2;
+    transform: scale(1.05);
+}
+
+/* Cell States */
+.board-cell.ship {
+    background: #666;
+}
+
+.board-cell.hit {
+    background: #ff4444;
+    color: white;
+}
+
+.board-cell.hit::after {
+    content: '✕';
+    font-size: 20px;
+}
+
+.board-cell.miss {
+    background: #87ceeb;
+    color: #333;
+}
+
+.board-cell.miss::after {
+    content: '•';
+    font-size: 20px;
+}
+
+.board-cell.sunk {
+    background: #8b0000;
+    color: white;
+}
+
+.board-cell.sunk::after {
+    content: '💀';
+    font-size: 16px;
+}
+
+.board-cell.preview {
+    background: rgba(255, 255, 0, 0.5);
+}
+
+.board-cell.invalid {
+    background: rgba(255, 0, 0, 0.5);
+}
+
+/* Game Screen Styles */
+#game-info {
+    text-align: center;
+    margin-bottom: 20px;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 15px;
+    border-radius: 10px;
+}
+
+#current-player {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+#game-status {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+}
+
+#ships-remaining {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+#game-boards {
+    display: flex;
+    gap: 40px;
+    justify-content: center;
+    align-items: flex-start;
+}
+
+.board-container {
+    text-align: center;
+}
+
+.board-container h3 {
+    margin-bottom: 15px;
+    font-size: 1.3rem;
+}
+
+#game-controls {
+    text-align: center;
+    margin-top: 20px;
+}
+
+#surrender {
+    padding: 10px 20px;
+    background: #ff4444;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#surrender:hover {
+    background: #ff3333;
+}
+
+/* Game Over Screen */
+#game-over-screen {
+    text-align: center;
+    background: rgba(0, 0, 0, 0.8);
+    padding: 40px;
+    border-radius: 15px;
+    margin: 50px auto;
+    max-width: 500px;
+}
+
+#winner-message {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+    color: #ffd700;
+}
+
+#game-stats {
+    margin: 20px 0;
+    font-size: 1.1rem;
+}
+
+#new-game {
+    padding: 15px 30px;
+    font-size: 18px;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+#new-game:hover {
+    background: #45a049;
+}
+
+/* Message Overlay */
+#message-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+#message-content {
+    background: white;
+    color: #333;
+    padding: 30px;
+    border-radius: 10px;
+    font-size: 1.2rem;
+    text-align: center;
+    max-width: 400px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    #ship-placement-area {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    #game-boards {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    
+    .game-board {
+        grid-template-columns: repeat(10, 30px);
+        grid-template-rows: repeat(10, 30px);
+    }
+    
+    .board-cell {
+        width: 30px;
+        height: 30px;
+    }
+}
+
+/* Animation for computer thinking */
+.computer-thinking {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 1; }
+    50% { opacity: 0.5; }
+    100% { opacity: 1; }
+}
