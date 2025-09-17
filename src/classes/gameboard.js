@@ -51,7 +51,7 @@ class Gameboard {
   receiveAttack(row, col) {
     const position = `${row},${col}`;
 
-    if (this.misses.includes(position)) {
+    if (this.attackedPositions.has(position)) {
       return 'already attacked';
     }
 
