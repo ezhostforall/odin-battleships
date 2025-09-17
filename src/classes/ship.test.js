@@ -15,3 +15,11 @@ it('should have a hit function that increments hit count', () => {
   expect(ship.hits).toBe(2);
 });
 
+it('should mark the ship as sunk when hits equal length', () => {
+  const ship = new Ship(2);
+  ship.hit();
+  expect(ship.sunk).toBe(false);
+  ship.hit();
+  expect(ship.hits).toBe(2);
+  expect(ship.sunk).toBe(true);
+});
