@@ -1,0 +1,38 @@
+# Node.js
+node_modules/
+npm-debug.log*
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.env
+
+# macOS
+.DS_Store
+
+# Logs
+*.log
+
+# IDEs
+.vscode/
+.idea/
+*.swp
+
+# Build
+dist/
+build/
+out/
+
+# OS generated files
+Thumbs.db
+
+# Docker
+*.pid
+
+# Archives
+*.zip
+*.tar
+*.gz
+*.bz2
+*.xz
