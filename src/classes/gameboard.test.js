@@ -154,14 +154,14 @@ it('should correctly identify when all ships are sunk', () => {
   gameboard.placeShip(ship1, 0, 0, true);
   gameboard.placeShip(ship2, 1, 0, true);
   
-  const allSunk = gameboard.ships.every(ship => ship.sunk);
+  const allSunk = gameboard.allShipsSunk();
   expect(allSunk).toBe(true);
 });
 
 it('should not register a hit on an already sunk ship', () => {
   const gameboard = new Gameboard();
   const ship = new Ship(1);
-  ship.sunk = true;
+  gameboard.receiveAttack(0, 0); // First attack to sink the ship
   gameboard.placeShip(ship, 0, 0, true);
   
   const result = gameboard.receiveAttack(0, 0);

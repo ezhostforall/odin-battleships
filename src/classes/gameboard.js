@@ -17,6 +17,9 @@ class Gameboard {
   }
 
   placeShip(ship, row, col, isHorizontal) {
+    if (!this.checkCanPlaceShip(ship, row, col, isHorizontal)) {
+      return false;
+    }
     const length = ship.length;
     for (let i = 0; i < length; i++) {
       if (isHorizontal) {
@@ -26,6 +29,22 @@ class Gameboard {
       }
     }
     this.ships.push(ship);
+    return true;
+  }
+
+  checkCanPlaceShip(ship, row, col, isHorizontal) {
+    const length = ship.length;
+    if (isHorizontal) {
+      if (col + length > 10) return false;
+      for (let i = 0; i < length; i++) {
+        if (this.board[row][col + i] !== null) return false;
+      }
+    } else {
+      if (row + length > 10) return false;
+      for (let i = 0; i < length; i++) {
+        if (this.board[row + i][col] !== null) return false;
+      }
+    }
     return true;
   }
 
@@ -45,6 +64,10 @@ class Gameboard {
       this.misses.push(position);
       return 'miss';
     }
+  }
+
+  allShipsSunk() {
+    return this.ships.every(ship => ship.sunk);
   }
 
 
