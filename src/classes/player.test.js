@@ -1,5 +1,6 @@
 const Player = require('./player');
 const Ship = require('./ship');
+const Gameboard = require('./gameboard');
 
 it('should create a Player instance', () => {
   const player = new Player();
