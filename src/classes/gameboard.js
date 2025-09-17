@@ -15,6 +15,24 @@ class Gameboard {
     return board;
   }
 
+  placeShip(ship, start, end) {
+    const [startX, startY] = start;
+    const [endX, endY] = end;
+
+    if (startX === endX) {
+      // Vertical placement
+      for (let y = startY; y <= endY; y++) {
+        this.board[startX][y] = ship;
+      }
+    } else if (startY === endY) {
+      // Horizontal placement
+      for (let x = startX; x <= endX; x++) {
+        this.board[x][startY] = ship;
+      }
+    }
+    this.ships.push(ship);
+  }
+
 
 }
 
