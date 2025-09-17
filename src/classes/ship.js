@@ -8,7 +8,7 @@ class Ship {
   hit() {
     this.hits += 1;
     this.sunk = this.hits >= this.length;
-  }
+  } 
 }
 
 module.exports = Ship;
